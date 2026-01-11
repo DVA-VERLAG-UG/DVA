@@ -440,6 +440,9 @@
                   autocomplete="on">
               <input type="hidden" name="form-name" value="kontakt-uc">
 
+              <!-- ✅ NEW: language field (Option A) -->
+              <input type="hidden" name="language" id="formLang" value="">
+
               <p style="display:none">
                 <label>Don’t fill this out: <input name="bot-field" /></label>
               </p>
@@ -521,6 +524,10 @@
 
       // set <html lang="">
       document.documentElement.setAttribute("lang", current);
+
+      // ✅ NEW: write language into hidden form field
+      const langInput = document.getElementById("formLang");
+      if (langInput) langInput.value = current;
 
       // toggle active state
       const switchEl = document.getElementById("langSwitch");
@@ -734,6 +741,14 @@
       submitBtn.textContent = T.sending;
 
       try {
+        // ✅ ensure language is set right before submit as well
+        const langInput = document.getElementById("formLang");
+        if (langInput && window.__DVA_COPY__) {
+          const path = window.location.pathname;
+          const m = path.match(/^\/(de|en|fr|tr)(\/|$)/);
+          langInput.value = m ? m[1] : (document.documentElement.getAttribute("lang") || "de");
+        }
+
         const data = new FormData(form);
         const body = new URLSearchParams();
         for (const [k, v] of data.entries()) body.append(k, v);
@@ -749,6 +764,14 @@
         showToast("ok", T.toastOk);
         form.reset();
 
+        // keep language after reset
+        const li = document.getElementById("formLang");
+        if (li) {
+          const path = window.location.pathname;
+          const m = path.match(/^\/(de|en|fr|tr)(\/|$)/);
+          li.value = m ? m[1] : (document.documentElement.getAttribute("lang") || "de");
+        }
+
       } catch (err) {
         showToast("err", T.toastErr);
       } finally {
@@ -759,3 +782,4 @@
   </script>
 </body>
 </html>
+
