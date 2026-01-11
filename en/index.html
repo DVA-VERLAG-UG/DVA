@@ -57,7 +57,7 @@
 
     main{
       flex: 1 0 auto;
-      padding-top: var(--hdr-h, 0px); /* ✅ no fixed header needed */
+      padding-top: var(--hdr-h, 0px);
       position: relative;
       z-index: 2;
     }
@@ -108,7 +108,7 @@
       border:1px solid var(--line);
       box-shadow:0 40px 120px rgba(0,0,0,.6);
       animation: fadeUp 1.2s ease forwards;
-      position: relative; /* ✅ for integrated toggle positioning */
+      position: relative;
     }
 
     /* ✅ Integrated language toggle (inside the box) */
@@ -157,7 +157,7 @@
       max-height:70px;
       object-fit:contain;
       display:block;
-      margin:0 auto 1.5rem;
+      margin:0 auto 1.1rem;
       padding:14px 18px;
       border-radius:14px;
       transition: transform .25s ease;
@@ -167,20 +167,21 @@
     h1{
       font-size: clamp(2rem, 5vw, 3.1rem);
       font-weight:900;
-      margin-bottom:.45rem;
+      margin-bottom:.25rem;
     }
     h2{
-      font-size:1.08rem;
-      font-weight:500;
-      color:var(--muted);
-      margin-bottom:1.6rem;
+      font-size:1.06rem;
+      font-weight:650;
+      color:rgba(255,255,255,.86);
+      margin-bottom:1.2rem;
+      line-height:1.25;
     }
 
     .divider{
       width:80px;
       height:2px;
       background:#fff;
-      margin:0 auto 1.6rem;
+      margin:0 auto 1.4rem;
       opacity:.7;
     }
 
@@ -188,7 +189,63 @@
       font-size:1.02rem;
       line-height:1.6;
       color:var(--muted);
-      margin-bottom:1.35rem;
+      margin-bottom:1.05rem;
+    }
+
+    .copy{
+      margin: 0 auto 1.1rem;
+      max-width: 58ch;
+    }
+
+    .services{
+      margin: 1.1rem auto 1.25rem;
+      max-width: 62ch;
+      text-align:left;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.28);
+      padding:14px 14px;
+    }
+
+    .services h3{
+      font-size:.95rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin:0 0 10px 0;
+      color:rgba(255,255,255,.9);
+    }
+
+    .services ul{
+      list-style:none;
+      display:grid;
+      gap:10px;
+      margin:0;
+      padding:0;
+    }
+
+    .services li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color:var(--muted);
+      line-height:1.45;
+      font-size:1.0rem;
+    }
+
+    .check{
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(0,255,153,.10);
+      border: 1px solid rgba(0,255,153,.35);
+      color:#fff;
+      flex: 0 0 22px;
+      margin-top:2px;
+      font-weight:900;
+      font-size:.85rem;
     }
 
     .status{
@@ -199,7 +256,7 @@
       letter-spacing:.12em;
       text-transform:uppercase;
       opacity:.9;
-      margin-bottom:1.4rem;
+      margin: 0 0 1.2rem;
     }
     .dot{
       width:10px;
@@ -251,7 +308,7 @@
       transition:max-height .45s ease, opacity .25s ease, transform .25s ease;
     }
     .panel.is-open{
-      max-height:560px;
+      max-height:650px;
       opacity:1;
       transform:translateY(0);
     }
@@ -317,7 +374,6 @@
 </head>
 
 <body>
-  <!-- Injected Header (unused here, but kept to avoid changing structure) -->
   <header id="site-header"></header>
 
   <div class="video-bg" aria-hidden="true">
@@ -342,18 +398,31 @@
         <img src="/under_construction/assets/dva-logo-1.png" alt="DVA Verlag Logo" class="logo">
 
         <h1>DVA-YD.com</h1>
-        <h2>DVA Verlag – In Aufbau</h2>
+        <h2 id="headline">DVA Verlag – Türkische Literatur. In Europa zu Hause.</h2>
 
         <div class="divider"></div>
 
-        <p>
-          Wir arbeiten derzeit an einem neuen digitalen Auftritt.<br>
-          Bald sind wir für Sie verfügbar.
+        <p class="copy" id="intro">
+          Wir bauen unsere digitale Präsenz auf – unser Verlagsgeschäft läuft jedoch weiter.
+          Wir sind der spezialisierte Partner für Autoren, die ihre türkischen Werke professionell in Europa veröffentlichen möchten.
+        </p>
+
+        <div class="services">
+          <h3 id="servicesTitle">Unser Service für Ihren Bucherfolg</h3>
+          <ul id="servicesList">
+            <li><span class="check">✓</span><span><strong>Veröffentlichung:</strong> Professionelle Begleitung vom Manuskript zum Buch.</span></li>
+            <li><span class="check">✓</span><span><strong>Vertrieb:</strong> Listung im deutschen und europäischen Buchhandel.</span></li>
+            <li><span class="check">✓</span><span><strong>Marketing:</strong> Zielgruppengerechte Ansprache der türkischen Community in Europa.</span></li>
+          </ul>
+        </div>
+
+        <p class="copy" id="ctaCopy">
+          Starten Sie jetzt: Nutzen Sie das Formular für Ihre Anfrage oder eine kurze Nachricht zu Ihrem Buchprojekt.
         </p>
 
         <div class="status">
           <span class="dot"></span>
-          <span>Website in Arbeit</span>
+          <span id="statusText">Website in Arbeit</span>
         </div>
 
         <div class="cta-row">
@@ -376,17 +445,17 @@
               </p>
 
               <div class="field">
-                <label for="uc_name">Name</label>
+                <label for="uc_name" id="lblName">Ihr Name</label>
                 <input id="uc_name" name="name" required>
               </div>
 
               <div class="field">
-                <label for="uc_email">E-Mail</label>
+                <label for="uc_email" id="lblEmail">Ihre E-Mail</label>
                 <input id="uc_email" type="email" name="email" required>
               </div>
 
               <div class="field">
-                <label for="uc_msg">Nachricht</label>
+                <label for="uc_msg" id="lblMsg">Ihre Nachricht</label>
                 <textarea id="uc_msg" name="nachricht" required></textarea>
               </div>
 
@@ -443,37 +512,174 @@
     const video = document.getElementById("bgvid");
     video?.play().catch(()=>{});
 
-    /* ✅ language switch (keeps same path, swaps /de /en /fr /tr) */
-    (function initLangSwitch(){
+    /* ✅ language + copy switch (Solution 1): keep same path, only swap /de /en /fr /tr */
+    (function initLangAndCopy(){
       const LANGS = ["de","en","fr","tr"];
-      const switchEl = document.getElementById("langSwitch");
-      if (!switchEl) return;
-
       const path = window.location.pathname;
-      const current =
-        LANGS.find(l => path === `/${l}` || path.startsWith(`/${l}/`)) || "de";
+      const m = path.match(/^\/(de|en|fr|tr)(\/|$)/);
+      const current = m ? m[1] : "de";
 
-      switchEl.querySelectorAll("[data-lang]").forEach(btn => {
-        btn.classList.toggle("is-active", btn.dataset.lang === current);
-      });
+      // set <html lang="">
+      document.documentElement.setAttribute("lang", current);
 
-      function buildTargetPath(targetLang){
-        if (LANGS.some(l => path === `/${l}` || path.startsWith(`/${l}/`))) {
-          return path.replace(/^\/(de|en|fr|tr)(\/|$)/, `/${targetLang}$2`);
+      // toggle active state
+      const switchEl = document.getElementById("langSwitch");
+      if (switchEl) {
+        switchEl.querySelectorAll("[data-lang]").forEach(btn => {
+          btn.classList.toggle("is-active", btn.dataset.lang === current);
+        });
+
+        function buildTargetPath(targetLang){
+          if (/^\/(de|en|fr|tr)(\/|$)/.test(path)) {
+            return path.replace(/^\/(de|en|fr|tr)(\/|$)/, `/${targetLang}$2`);
+          }
+          return `/${targetLang}${path.startsWith("/") ? "" : "/"}${path}`;
         }
-        return `/${targetLang}${path.startsWith("/") ? "" : "/"}${path}`;
+
+        switchEl.addEventListener("click", (e) => {
+          const btn = e.target.closest("[data-lang]");
+          if (!btn) return;
+
+          const targetLang = btn.dataset.lang;
+          const targetPath = buildTargetPath(targetLang);
+
+          window.location.href = targetPath + window.location.search + window.location.hash;
+        });
       }
 
-      switchEl.addEventListener("click", (e) => {
-        const btn = e.target.closest("[data-lang]");
-        if (!btn) return;
+      // content dictionary
+      const COPY = {
+        de: {
+          headline: "DVA Verlag – Türkische Literatur. In Europa zu Hause.",
+          intro:
+            "Wir bauen unsere digitale Präsenz auf – unser Verlagsgeschäft läuft jedoch weiter. " +
+            "Wir sind der spezialisierte Partner für Autoren, die ihre türkischen Werke professionell in Europa veröffentlichen möchten.",
+          servicesTitle: "Unser Service für Ihren Bucherfolg",
+          services: [
+            "<strong>Veröffentlichung:</strong> Professionelle Begleitung vom Manuskript zum Buch.",
+            "<strong>Vertrieb:</strong> Listung im deutschen und europäischen Buchhandel.",
+            "<strong>Marketing:</strong> Zielgruppengerechte Ansprache der türkischen Community in Europa."
+          ],
+          ctaCopy:
+            "Starten Sie jetzt: Nutzen Sie das Formular für Ihre Anfrage oder eine kurze Nachricht zu Ihrem Buchprojekt.",
+          status: "Website in Arbeit",
+          openBtn: "Kontakt aufnehmen",
+          closeBtn: "Schließen",
+          submitBtn: "Senden",
+          labels: { name: "Ihr Name", email: "Ihre E-Mail", msg: "Ihre Nachricht" },
+          toastOk: "Danke! Ihre Nachricht wurde gesendet.",
+          toastErr: "Ups – das hat leider nicht geklappt. Bitte versuchen Sie es erneut.",
+          sending: "Sende..."
+        },
+        tr: {
+          headline: "DVA Yayıncılık – Eserlerinizi Avrupa'ya Taşıyoruz",
+          intro:
+            "Web sitemiz yenileniyor, ancak biz yazarlarımız için çalışmaya devam ediyoruz. " +
+            "Almanya merkezli yayınevimiz, eserlerinizi Avrupa standartlarında okurlarla buluşturuyor.",
+          servicesTitle: "Size sunduğumuz ayrıcalıklar",
+          services: [
+            "<strong>Profesyonel Yayıncılık:</strong> Editörlükten kapak tasarımına tam destek.",
+            "<strong>Avrupa Dağıtımı:</strong> Kitabınızın Almanya ve tüm Avrupa'da satışı.",
+            "<strong>Güvenilirlik:</strong> Almanya güvencesiyle şeffaf yayıncılık süreci."
+          ],
+          ctaCopy:
+            "Hemen Başlayın: Projenizden bahsetmek veya soru sormak için aşağıdaki formu doldurarak bize hemen ulaşabilirsiniz.",
+          status: "Web sitesi yapım aşamasında",
+          openBtn: "İletişime geç",
+          closeBtn: "Kapat",
+          submitBtn: "Gönder",
+          labels: { name: "Adınız Soyadınız", email: "E-posta Adresiniz", msg: "Mesajınız" },
+          toastOk: "Teşekkürler! Mesajınız gönderildi.",
+          toastErr: "Üzgünüz — bir hata oluştu. Lütfen tekrar deneyin.",
+          sending: "Gönderiliyor..."
+        },
+        en: {
+          headline: "DVA Publishing – Your Gateway to the European Book Market",
+          intro:
+            "Our website is under construction, but we are fully operational. " +
+            "We specialize in bringing Turkish literature to the European market with professional publishing standards based in Germany.",
+          servicesTitle: "Our Core Services",
+          services: [
+            "<strong>Full-Service Publishing:</strong> Editing, design, and production.",
+            "<strong>Distribution Network:</strong> Making your book available across Europe.",
+            "<strong>Cross-Border Success:</strong> Connecting Turkish authors with European readers."
+          ],
+          ctaCopy:
+            "Get in Touch: Use the form below to send us a message or introduce your manuscript.",
+          status: "Website in progress",
+          openBtn: "Get in touch",
+          closeBtn: "Close",
+          submitBtn: "Send",
+          labels: { name: "Your Name", email: "Your Email", msg: "Your Message" },
+          toastOk: "Thanks! Your message has been sent.",
+          toastErr: "Oops — something went wrong. Please try again.",
+          sending: "Sending..."
+        },
+        fr: {
+          headline: "Éditions DVA – La littérature turque en Europe",
+          intro:
+            "Notre site est en construction, mais notre maison d'édition est active. " +
+            "Basés en Allemagne, nous offrons aux auteurs turcs une opportunité unique de publier leurs œuvres pour le public européen.",
+          servicesTitle: "Nos Services",
+          services: [
+            "<strong>Publication complète :</strong> De la correction à l'impression.",
+            "<strong>Distribution européenne :</strong> Votre livre disponible en France et en Europe.",
+            "<strong>Expertise :</strong> Un pont culturel entre la Turquie et l'Europe."
+          ],
+          ctaCopy:
+            "Contactez-nous : Utilisez le formulaire ci-dessous pour nous envoyer un message concernant votre projet.",
+          status: "Site en cours",
+          openBtn: "Nous contacter",
+          closeBtn: "Fermer",
+          submitBtn: "Envoyer",
+          labels: { name: "Votre Nom", email: "Votre E-mail", msg: "Votre Message" },
+          toastOk: "Merci ! Votre message a été envoyé.",
+          toastErr: "Oups — une erreur s'est produite. Veuillez réessayer.",
+          sending: "Envoi..."
+        }
+      };
 
-        const targetLang = btn.dataset.lang;
-        const targetPath = buildTargetPath(targetLang);
+      const t = COPY[current] || COPY.de;
 
-        window.location.href =
-          targetPath + window.location.search + window.location.hash;
-      });
+      // inject text
+      const elHeadline = document.getElementById("headline");
+      const elIntro = document.getElementById("intro");
+      const elServicesTitle = document.getElementById("servicesTitle");
+      const elServicesList = document.getElementById("servicesList");
+      const elCtaCopy = document.getElementById("ctaCopy");
+      const elStatus = document.getElementById("statusText");
+      const btnOpen = document.getElementById("openContact");
+      const btnClose = document.getElementById("closeContact");
+      const btnSubmit = document.getElementById("submitBtn");
+      const lblName = document.getElementById("lblName");
+      const lblEmail = document.getElementById("lblEmail");
+      const lblMsg = document.getElementById("lblMsg");
+
+      if (elHeadline) elHeadline.textContent = t.headline;
+      if (elIntro) elIntro.textContent = t.intro;
+      if (elServicesTitle) elServicesTitle.textContent = t.servicesTitle;
+      if (elCtaCopy) elCtaCopy.textContent = t.ctaCopy;
+      if (elStatus) elStatus.textContent = t.status;
+
+      if (btnOpen) btnOpen.textContent = t.openBtn;
+      if (btnClose) btnClose.textContent = t.closeBtn;
+      if (btnSubmit) btnSubmit.textContent = t.submitBtn;
+
+      if (lblName) lblName.textContent = t.labels.name;
+      if (lblEmail) lblEmail.textContent = t.labels.email;
+      if (lblMsg) lblMsg.textContent = t.labels.msg;
+
+      if (elServicesList) {
+        elServicesList.innerHTML = "";
+        t.services.forEach(item => {
+          const li = document.createElement("li");
+          li.innerHTML = `<span class="check">✓</span><span>${item}</span>`;
+          elServicesList.appendChild(li);
+        });
+      }
+
+      // expose toast strings for submit handler below
+      window.__DVA_COPY__ = t;
     })();
 
     /* contact panel toggle */
@@ -513,12 +719,19 @@
     form?.addEventListener("submit", async (e) => {
       e.preventDefault();
 
+      const T = window.__DVA_COPY__ || {
+        toastOk: "Danke! Ihre Nachricht wurde gesendet.",
+        toastErr: "Ups – das hat leider nicht geklappt. Bitte versuchen Sie es erneut.",
+        sending: "Sende...",
+        submitBtn: "Senden"
+      };
+
       toast.className = "toast";
       toast.textContent = "";
       toast.style.display = "none";
 
       submitBtn.disabled = true;
-      submitBtn.textContent = "Sende...";
+      submitBtn.textContent = T.sending;
 
       try {
         const data = new FormData(form);
@@ -533,14 +746,14 @@
 
         if (!res.ok) throw new Error("Bad response");
 
-        showToast("ok", "Danke! Ihre Nachricht wurde gesendet.");
+        showToast("ok", T.toastOk);
         form.reset();
 
       } catch (err) {
-        showToast("err", "Ups – das hat leider nicht geklappt. Bitte versuchen Sie es erneut.");
+        showToast("err", T.toastErr);
       } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = "Senden";
+        submitBtn.textContent = (window.__DVA_COPY__?.submitBtn) || "Senden";
       }
     });
   </script>
